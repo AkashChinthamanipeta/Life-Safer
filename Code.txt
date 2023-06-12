@@ -1,0 +1,30 @@
+#include <Adafruit_MLX90614.h>
+Adafruit_MLX90614 mlx = Adafruit_MLX90614();
+ 
+double temp_amb,temp_obj;
+ 
+void setup()
+{
+  Serial.begin(9600);
+  pinMode(7,OUTPUT);
+  mlx.begin();        
+}
+void loop()
+{
+  temp_amb = mlx.readAmbientTempC();
+  temp_obj = mlx.readObjectTempC();
+  Serial.println(temp_amb); 
+  Serial.println(temp_obj);
+    delay(1000);
+  if(temp_obj>38){
+    digitalWrite(7,HIGH); 
+    
+        delay(1000);
+  }
+  else
+  {
+    digitalWrite(7,LOW);
+        delay(1000);
+  }
+
+}
